@@ -1,7 +1,6 @@
 package com.epam.jmp.dto;
 
 /**
- *
  * @author joanna
  */
 public class CreditBankCard extends BankCard {

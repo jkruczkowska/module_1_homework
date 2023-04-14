@@ -7,6 +7,7 @@ import com.epam.jmp.service.api.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author joanna
  */
 public class ServiceImpl implements Service {
@@ -35,13 +35,6 @@ public class ServiceImpl implements Service {
     @Override
     public Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber) {
 
-//        for (List<Subscription> userStorage : storage.values()) {
-//            for (Subscription subscription : userStorage) {
-//                return Optional.of(subscription);
-//            }
-//        }
-//        return Optional.empty();
-
         Predicate<Subscription> subscriptionPredicate = s -> s.cardNumber().equals(cardNumber);
         return getAllSubscriptionsByCondition(subscriptionPredicate).stream().findFirst();
     }
@@ -50,8 +43,8 @@ public class ServiceImpl implements Service {
     public List<Subscription> getAllSubscriptionsByCondition(Predicate<Subscription> filter) {
         return storage.values()
                 .stream()
-                .flatMap(userStorage -> userStorage.stream())
-                .filter(subscription -> filter.test(subscription))
+                .flatMap(Collection::stream)
+                .filter(filter::test)
                 .collect(Collectors.toList());
     }
 

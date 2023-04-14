@@ -30,25 +30,7 @@ public class BankImpl implements Bank {
 
     @Override
     public BankCard createBankCard(User user, BankCardType bankCardType) {
-
         String number = UUID.randomUUID().toString();
         return cardCreators.getOrDefault(bankCardType, this::throwIfTypeIsUnknown).apply(number, user);
-
-//        if (BankCardType.CREDIT == bankCardType) {
-//            return new CreditBankCard(number, user);
-//        } else if (BankCardType.DEBIT == bankCardType) {
-//            return new DebitBankCard(number, user);
-//        } else {
-//            throw new IllegalArgumentException("Unknown bank card type " + bankCardType.name());
-//        }
-
-//        if (bankCardType == null) {
-//            throw new IllegalArgumentException("Bank card cannot be null");
-//        }
-//        switch (bankCardType) {
-//            case CREDIT -> new CreditBankCard(number, user);
-//            case DEBIT -> new DebitBankCard(number, user);
-//            default -> throw new IllegalArgumentException("Unknown bank card type " + bankCardType.name());
-//        }
     }
 }

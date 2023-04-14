@@ -14,6 +14,7 @@ public interface Service {
     static boolean isPayableUser(User user) {
         return user.birthday().isBefore(LocalDate.now().minusYears(18));
     }
+
     default double getAverageUsersAge() {
         return getAllUsers()
                 .stream()
@@ -21,8 +22,12 @@ public interface Service {
                 .average()
                 .orElse(0);
     }
+
     void subscribe(BankCard bankCard);
+
     Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber);
+
     List<Subscription> getAllSubscriptionsByCondition(Predicate<Subscription> filter);
+
     List<User> getAllUsers();
 }

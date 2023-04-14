@@ -26,7 +26,8 @@ public class Main {
         service.subscribe(debitCard);
 
         Optional<Subscription> subscriptionByBankCardNumber = service.getSubscriptionByBankCardNumber(creditCard.getNumber());
-        subscriptionByBankCardNumber.ifPresent(System.out::println);
+        Subscription subscription = subscriptionByBankCardNumber.orElseThrow(() -> new RuntimeException("There is no such subscription."));
+        System.out.println(subscription);
 
         System.out.println(service.getAllUsers());
         System.out.println("Average users age is: " + service.getAverageUsersAge());
